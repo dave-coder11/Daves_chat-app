@@ -6,7 +6,7 @@ import sys
 HEADER_LENGTH = 10
 
 IP = "192.168.219.30"
-PORT = int(input("Plse insert the code your host gave you: "))
+PORT = int(input("Please insert the code your host gave you: "))
 my_username = input("Username: ")
 
 
