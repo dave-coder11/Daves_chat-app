@@ -1,43 +1,42 @@
-# import all the required  modules
+
 import socket
 import threading
 from tkinter import *
 from tkinter import font
 from tkinter import ttk
  
-# import all functions /
-#  everything from chat.py file
+
  
 PORT = 5050
 SERVER = "192.168.219.30"
 ADDRESS = (SERVER, PORT)
 FORMAT = "utf-8"
  
-# Create a new client socket
-# and connect to the server
-client = socket.socket(socket.AF_INET,
-                       socket.SOCK_STREAM)
-client.connect(ADDRESS)
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+try:
+    client.connect(ADDRESS)
+except:
+    print("Connection Failed")
  
- 
-# GUI class for the chat
+# GUI code
 class GUI:
-    # constructor method
+    
     def __init__(self):
  
-        # chat window which is currently hidden
+        # chat window hidden
         self.Window = Tk()
         self.Window.withdraw()
  
         # login window
         self.login = Toplevel()
-        # set the title
+        # set title
         self.login.title("Login")
         self.login.resizable(width=False,
                              height=False)
         self.login.configure(width=400,
                              height=300)
-        # create a Label
+
         self.pls = Label(self.login,
                          text="Please login to continue",
                          justify=CENTER,
@@ -46,7 +45,7 @@ class GUI:
         self.pls.place(relheight=0.15,
                        relx=0.2,
                        rely=0.07)
-        # create a Label
+      
         self.labelName = Label(self.login,
                                text="Name: ",
                                font="Helvetica 12")
@@ -55,8 +54,7 @@ class GUI:
                              relx=0.1,
                              rely=0.2)
  
-        # create a entry box for
-        # tyoing the message
+        
         self.entryName = Entry(self.login,
                                font="Helvetica 14")
  
@@ -65,11 +63,10 @@ class GUI:
                              relx=0.35,
                              rely=0.2)
  
-        # set the focus of the cursor
+        
         self.entryName.focus()
  
-        # create a Continue Button
-        # along with action
+        
         self.go = Button(self.login,
                          text="CONTINUE",
                          font="Helvetica 14 bold",
@@ -83,15 +80,15 @@ class GUI:
         self.login.destroy()
         self.layout(name)
  
-        # the thread to receive messages
+        
         rcv = threading.Thread(target=self.receive)
         rcv.start()
  
-    # The main layout of the chat
+    # The main chat layout
     def layout(self, name):
  
         self.name = name
-        # to show chat window
+        #  show chat 
         self.Window.deiconify()
         self.Window.title("CHATROOM")
         self.Window.resizable(width=False,
@@ -140,8 +137,7 @@ class GUI:
                               fg="#EAECEE",
                               font="Helvetica 13")
  
-        # place the given widget
-        # into the gui window
+        
         self.entryMsg.place(relwidth=0.74,
                             relheight=0.06,
                             rely=0.008,
@@ -149,7 +145,7 @@ class GUI:
  
         self.entryMsg.focus()
  
-        # create a Send Button
+        
         self.buttonMsg = Button(self.labelBottom,
                                 text="Send",
                                 font="Helvetica 10 bold",
@@ -164,11 +160,10 @@ class GUI:
  
         self.textCons.config(cursor="arrow")
  
-        # create a scroll bar
+        
         scrollbar = Scrollbar(self.textCons)
  
-        # place the scroll bar
-        # into the gui window
+        
         scrollbar.place(relheight=1,
                         relx=0.974)
  
@@ -176,7 +171,7 @@ class GUI:
  
         self.textCons.config(state=DISABLED)
  
-    # function to basically start the thread for sending messages
+    
     def sendButton(self, msg):
         self.textCons.config(state=DISABLED)
         self.msg = msg
@@ -184,13 +179,13 @@ class GUI:
         snd = threading.Thread(target=self.sendMessage)
         snd.start()
  
-    # function to receive messages
+    
     def receive(self):
         while True:
             try:
                 message = client.recv(1024).decode(FORMAT)
  
-                # if the messages from the server is NAME send the client's name
+                
                 if message == 'NAME':
                     client.send(self.name.encode(FORMAT))
                 else:
@@ -202,12 +197,12 @@ class GUI:
                     self.textCons.config(state=DISABLED)
                     self.textCons.see(END)
             except:
-                # an error will be printed on the command line or console if there's an error
+
                 print("An error occured!")
                 client.close()
                 break
  
-    # function to send messages
+   
     def sendMessage(self):
         self.textCons.config(state=DISABLED)
         while True:
@@ -216,5 +211,5 @@ class GUI:
             break
  
  
-# create a GUI class object
+
 g = GUI()
