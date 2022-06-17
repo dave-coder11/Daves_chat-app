@@ -18,6 +18,9 @@ try:
     client.connect(ADDRESS)
 except:
     print("Connection Failed")
+    error = 1
+else:
+    error = 0
  
 # GUI code
 class GUI:
@@ -212,4 +215,7 @@ class GUI:
  
  
 
-g = GUI()
+if error == 1:
+    print(f"An error as hapend. there is no server open on the IP of {ADDRESS} and a port of {PORT}")
+else:
+    g = GUI()
