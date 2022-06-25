@@ -22,7 +22,6 @@ except:
 else:
     error = 0
  
-# GUI code
 class GUI:
     
     def __init__(self):
@@ -31,9 +30,7 @@ class GUI:
         self.Window = Tk()
         self.Window.withdraw()
  
-        # login window
         self.login = Toplevel()
-        # set title
         self.login.title("Login")
         self.login.resizable(width=False,
                              height=False)
@@ -87,11 +84,10 @@ class GUI:
         rcv = threading.Thread(target=self.receive)
         rcv.start()
  
-    # The main chat layout
     def layout(self, name):
  
         self.name = name
-        #  show chat 
+
         self.Window.deiconify()
         self.Window.title("CHATROOM")
         self.Window.resizable(width=False,
@@ -192,7 +188,7 @@ class GUI:
                 if message == 'NAME':
                     client.send(self.name.encode(FORMAT))
                 else:
-                    # insert messages to text box
+
                     self.textCons.config(state=NORMAL)
                     self.textCons.insert(END,
                                          message+"\n\n")
@@ -216,6 +212,6 @@ class GUI:
  
 
 if error == 1:
-    print(f"An error as hapend. there is no server open on the IP of {ADDRESS} and a port of {PORT}")
+    print(f"An error as hapend. There is no server open on the IP of {ADDRESS} and a port of {PORT}")
 else:
     g = GUI()
