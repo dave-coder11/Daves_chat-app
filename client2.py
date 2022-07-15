@@ -211,6 +211,6 @@ class GUI:
  
 
 if error == 1:
-    print(f"An error as hapend. There is no server open on the IP of {ADDRESS} and a port of {PORT}")
+    print(f"An Error As Occured! There Is No Server Open On The IP Of {ADDRESS} And The Port {PORT}")
 else:
     g = GUI()
