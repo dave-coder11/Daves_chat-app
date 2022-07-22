@@ -73,6 +73,20 @@ def handle(conn, addr):
  
  
 def broadcastMessage(message):
+    if message[0] == '@':
+        i = 1
+        while message[i] != ' ':
+            end_message = end_message + message[i]
+            i += 1
+        if end_message == 'server ':
+            length = len(message)
+            while length != 0:
+                end_message_server = end_message_server + message[i]
+                i =+ 1
+                length =-1
+            print(f'A message for the server ({end_message_server}).')
+
+            
     for client in clients:
         client.send(message)
  

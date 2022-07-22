@@ -207,6 +207,8 @@ class GUI:
             message = (f"{self.name}: {self.msg}")
             client.send(message.encode(FORMAT))
             break
+
+        
  
  
 
