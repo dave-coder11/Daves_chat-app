@@ -1,5 +1,4 @@
 import socket
- 
 import threading
  
 PORT = 5050
@@ -47,8 +46,7 @@ def startChat():
         conn.send('Connection successful!'.encode(FORMAT))
  
 
-        thread = threading.Thread(target=handle,
-                                  args=(conn, addr))
+        thread = threading.Thread(target=handle, args=(conn, addr))
         thread.start()
  
 

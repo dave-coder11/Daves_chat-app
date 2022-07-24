@@ -1,9 +1,6 @@
 import socket
 import threading
 from tkinter import *
-from tkinter import font
-from tkinter import ttk
-
 
  
 PORT = 5050
